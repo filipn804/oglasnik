@@ -23,6 +23,14 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+//admin
+Route::prefix('admin')->middleware('auth','isAdmin')->group(function() {
+    Route::get('/ads', [AdminController::class, 'adminGetAllAds'])->name('admin.ads');
+    Route::get('/ads/comments', [AdminController::class, 'adminGetAllComments'])->name('admin.ads.comments');
+    Route::delete('/ads/{id}', [AdminController::class, 'adminGetAllAds'])->name('admin.ads.delete');
+    Route::delete('/ads/comments/{id}', [AdminController::class, 'adminGetAllAds'])->name('admin.ads.comments.delete');
+});
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

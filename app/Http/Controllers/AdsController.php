@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Ad;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdsController extends Controller
 {
@@ -53,6 +54,9 @@ class AdsController extends Controller
         $ad->content = $request->input('content');
         $ad->category_id = $request->input('category_id');
         $ad->price = $request->input('price');
+        $user = Auth::user();
+        $id = Auth::id();
+        $ad->user_id = $id;
 
         $image = $request->file("image");
         $filename = md5(uniqid()) . "." . $image->getClientOriginalExtension();

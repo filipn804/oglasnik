@@ -1,0 +1,34 @@
+<?php
+
+namespace App\Http\Middleware\Auth;
+
+
+use Closure;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
+
+class AdminMiddleware
+{
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     */
+    public function handle(Request $request, Closure $next): Response
+    {
+        if(Auth::check()) {
+
+        if(Auth::user()->role == '1') 
+        {
+          return $next($request);
+        }
+        else{
+          return redirect('/home')->with('mesage', 'Access denied as you are not Admin?');
+        }
+    } else {
+        return redirect('/login')->with('mesage', 'Login to access web page?');
+    }
+    return $next($request);
+}
+
+}
