@@ -37,4 +37,7 @@ Route::middleware('auth')->group(function () {
 
 });
 
+Route::get('/category/{id}', [HomeController::class, 'getAdsInCategory'])->name('ads.category');
+Route::get('/ads', [HomeController::class, 'getAds'])->name('ads');
+
 require __DIR__.'/auth.php';
