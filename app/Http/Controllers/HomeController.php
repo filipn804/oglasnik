@@ -33,8 +33,22 @@ class HomeController extends Controller
 
         $ads = Ad::where('status', 'active')
             ->where('category_id', $id)
-            ->where('ads')
             ->get();
         return view('home')->with(['ads' => $ads]);
     }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function show($id)
+    {
+
+        $ad = Ad::find($id);
+        return view('ads.show')->with(['ad' => $ad]);
+    }
+
 }
+
+
