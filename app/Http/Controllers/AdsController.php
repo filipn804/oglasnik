@@ -25,7 +25,7 @@ class AdsController extends Controller
         if ($user && $user->is_admin === 1) {
             $ads = Ad::paginate(5);
         } else if ($user) {
-            $ads = Ad::where("user_id", $user->id)->paginate(10);
+            $ads = Ad::where("user_id", $user->id)->paginate(5);
         }
 
         return view("ads.index", compact('ads'));
@@ -54,20 +54,22 @@ class AdsController extends Controller
         $messages = [
             'required' => ':attribute je obavezan.',
             'email'    => ':attribute mora biti u ispravnom email formatu.',
+            'numeric' => ':atribute mora biti broj'
         ];
         $this->validate($request, [
            "title" => "required",
            "content" => "required|min:10",
            "category_id" => "required",
            "image" => "required|mimes:jpeg,jpg,png,gif",
-           "quantity" => "required|min:1|numeric"
+           "quantity" => "required|min:1|numeric",
+            "price" => "required|integer|gt:0"
         ], $messages);
 
         $ad = new Ad();
         $ad->title = $request->input('title');
         $ad->content = $request->input('content');
         $ad->category_id = $request->input('category_id');
-        $ad->price = $request->input('price');
+        $ad->price = (int) $request->input('price');
         $ad->quantity = $request->input('quantity');
         $user = Auth::user();
         $id = Auth::id();
@@ -154,13 +156,15 @@ class AdsController extends Controller
         $messages = [
             'required' => ':attribute je obavezan.',
             'email'    => ':attribute mora biti u ispravnom email formatu.',
+            'numeric' => ':atribute mora biti broj'
         ];
         $this->validate($request, [
             "title" => "required",
             "content" => "required|min:10",
             "category_id" => "required",
             "image" => "mimes:jpeg,jpg,png,gif",
-            "quantity" => "required|min:1|numeric"
+            "quantity" => "required|min:1|numeric",
+            "price" => "required|integer|gt:0"
         ], $messages);
 
         $ad = Ad::find($id);
