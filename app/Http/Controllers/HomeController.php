@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ad;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Models\User;
 
 
 class HomeController extends Controller
@@ -46,7 +45,15 @@ class HomeController extends Controller
     {
 
         $ad = Ad::find($id);
-        return view('ads.show')->with(['ad' => $ad]);
+
+        $relatedAds = Ad::where('category_id', $ad->category_id)
+            ->whereNot('id', $ad->id)
+            ->limit(3)
+            ->get();
+
+        $user = User::find($ad->user_id);
+
+        return view('ads.show')->with(['ad' => $ad, 'user' => $user, 'relatedAds' => $relatedAds]);
     }
 
 }

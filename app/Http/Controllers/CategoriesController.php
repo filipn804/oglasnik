@@ -46,7 +46,7 @@ class CategoriesController extends Controller
         $category->title = $request->title;
         $category->save();
 
-        return redirect(route('categories.index'))->with('message', 'Category created with success');
+        return redirect(route('categories.index'))->with('message', 'Kategorija uspjšeno kreirana');
     }
 
     /**
@@ -90,7 +90,7 @@ class CategoriesController extends Controller
         $category->title = $request->title;
         $category->save();
 
-        return redirect(route('categories.index'))->with('message', 'Category updated with success');
+        return redirect(route('categories.index'))->with('message', 'Kategorija uspješno ažurirana');
     }
 
     /**
@@ -103,6 +103,6 @@ class CategoriesController extends Controller
     {
         Category::find($id)->delete();
 
-        return redirect(route('categories.index'))->with('message', 'Category deleted with success');
+        return redirect(route('categories.index'))->with('message', 'Kategorija uspješno obrisana');
     }
 }

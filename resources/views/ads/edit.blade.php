@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Update Ad
+            Ažuriraj Oglas
         </h2>
     </x-slot>
 
@@ -16,10 +16,10 @@
                     <div class="grid grid-cols-3 gap-6">
                         <div class="col-span-3 sm:col-span-2">
                             <label class="block text-sm font-medium text-gray-700">
-                                Title
+                                Naslov
                             </label>
                             <div class="mt-1 flex rounded-md shadow-sm">
-                                <input type="text" name="title" value="{{$ad->title}}" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300 @error('title') border-red-500 @enderror" placeholder="Title">
+                                <input type="text" name="title" value="{{$ad->title}}" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300 @error('title') border-red-500 @enderror" placeholder="Naslov">
                             </div>
                             @error('title')
                             <div class="text-red-600">{{$message}}</div>
@@ -28,7 +28,7 @@
 
                         <div class="col-span-3 sm:col-span-2">
                             <label class="block text-sm font-medium text-gray-700">
-                                Content
+                                Sadržaj
                             </label>
                             <div class="mt-1 flex rounded-md shadow-sm">
                                 <textarea name="content" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300 @error('content') border-red-500 @enderror">{{$ad->content}}</textarea>
@@ -40,10 +40,10 @@
 
                         <div class="col-span-3 sm:col-span-2">
                             <label class="block text-sm font-medium text-gray-700">
-                                Price
+                                Cijena (cijeli broj)
                             </label>
                             <div class="mt-1 flex rounded-md shadow-sm">
-                                <input type="text" name="price" value="{{$ad->price}}" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300 @error('title') border-red-500 @enderror" placeholder="Title">
+                                <input type="text" name="price" value="{{$ad->price}}" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300 @error('price') border-red-500 @enderror" placeholder="Title">
                             </div>
                             @error('price')
                             <div class="text-red-600">{{$message}}</div>
@@ -52,7 +52,19 @@
 
                         <div class="col-span-3 sm:col-span-2">
                             <label class="block text-sm font-medium text-gray-700">
-                                Category
+                                Količina
+                            </label>
+                            <div class="mt-1 flex rounded-md shadow-sm">
+                                <input type="number" min="1" name="quantity" value="{{$ad->quantity}}" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300 @error('quantity') border-red-500 @enderror" placeholder="Količina">
+                            </div>
+                            @error('quantity')
+                            <div class="text-red-600">{{$message}}</div>
+                            @enderror
+                        </div>
+
+                        <div class="col-span-3 sm:col-span-2">
+                            <label class="block text-sm font-medium text-gray-700">
+                                Kategorija
                             </label>
                             <div class="mt-1 flex rounded-md shadow-sm">
                                 <select name="category_id" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300 @error('category_id') border-red-500 @enderror">
@@ -69,7 +81,7 @@
 
                         <div class="col-span-3 sm:col-span-2">
                             <label class="block text-sm font-medium text-gray-700">
-                                Image
+                                Slika
                             </label>
                             @if($ad->image)
                                 <img src="{{url('/') . '/uploads/' . $ad->image}}" width="200" />
@@ -87,7 +99,7 @@
                 </div>
                 <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
                     <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        Update Ad
+                        Ažuriraj Oglas
                     </button>
                 </div>
             </div>
